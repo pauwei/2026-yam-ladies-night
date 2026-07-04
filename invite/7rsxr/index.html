@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#ECE8E0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Ladies Night · Reservation for Grace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #ECE8E0;
+    --cream-deep: #E4DFD4;
+    --terra: #BC4B2B;
+    --terra-soft: #C96A47;
+    --ink: #5A4A40;
+    --paper: #F3F0E9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--terra);
+    min-height: 100svh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* subtle paper grain */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: .5;
+    z-index: 0;
+    background-image: radial-gradient(rgba(120,90,60,.05) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  /* ============ STAGE 1 : ENVELOPE ============ */
+  .stage {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 42px;
+    z-index: 5;
+    padding: 24px;
+    transition: opacity .7s ease, visibility .7s;
+    cursor: pointer;
+  }
+  .stage.gone { opacity: 0; visibility: hidden; }
+
+  .envelope {
+    position: relative;
+    width: min(78vw, 340px);
+    height: min(52vw, 226px);
+    transform: translateY(0);
+    animation: float 4s ease-in-out infinite;
+  }
+  .envelope.opening { animation: none; }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-10px); }
+  }
+
+  .env-part { position: absolute; inset: 0; border-radius: 8px; }
+
+  .env-body {
+    background: linear-gradient(160deg, #C9542F, var(--terra));
+    box-shadow: 0 26px 50px -18px rgba(120,45,20,.55);
+    z-index: 2;
+  }
+  /* the letter that peeks up */
+  .letter {
+    position: absolute;
+    left: 7%; right: 7%;
+    bottom: 5%;
+    height: 92%;
+    background: var(--paper);
+    border-radius: 6px 6px 4px 4px;
+    z-index: 3;
+    transform: translateY(0) scale(.98);
+    box-shadow: 0 -6px 24px -10px rgba(120,45,20,.35);
+    transition: transform 1s cubic-bezier(.2,.8,.2,1);
+    display: flex; align-items: flex-start; justify-content: center;
+    padding-top: 12px;
+  }
+  .letter .monogram {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--terra);
+    font-size: 30px; letter-spacing: .16em;
+    opacity: 0; transition: opacity .5s .35s;
+  }
+  .opening .letter { transform: translateY(-72%) scale(1); }
+  .opening .letter .monogram { opacity: .85; }
+
+  /* front pocket (triangular) sits over the letter bottom */
+  .env-front {
+    z-index: 4;
+    background: linear-gradient(160deg, var(--terra), #A93F22);
+    clip-path: polygon(0 32%, 50% 100%, 100% 32%, 100% 100%, 0 100%);
+    box-shadow: inset 0 2px 10px rgba(255,255,255,.08);
+  }
+  /* side flaps for depth */
+  .env-left, .env-right {
+    z-index: 4;
+    background: linear-gradient(180deg, #B94729, #A93F22);
+  }
+  .env-left  { clip-path: polygon(0 0, 50% 46%, 0 100%); }
+  .env-right { clip-path: polygon(100% 0, 50% 46%, 100% 100%); }
+
+  /* top flap that opens */
+  .env-flap {
+    z-index: 6;
+    background: linear-gradient(180deg, #C9542F, #B14526);
+    clip-path: polygon(0 0, 50% 62%, 100% 0);
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform .9s cubic-bezier(.6,.05,.3,1), z-index 0s .45s;
+    backface-visibility: hidden;
+  }
+  .opening .env-flap { transform: rotateX(180deg); z-index: 1; }
+
+  .seal {
+    position: absolute;
+    top: 40%; left: 50%;
+    width: 60px; height: 60px;
+    transform: translate(-50%,-50%);
+    z-index: 7;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #D25B36, #9C3A1F);
+    box-shadow: 0 4px 14px -3px rgba(120,45,20,.6), inset 0 2px 6px rgba(255,255,255,.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600; color: #F4E7DF; font-size: 15px; letter-spacing: .06em;
+    transition: transform .5s ease, opacity .4s ease;
+  }
+  .opening .seal { transform: translate(-50%,-50%) scale(.4); opacity: 0; }
+
+  .tap-hint {
+    font-size: 13px; letter-spacing: .35em; text-transform: uppercase;
+    font-weight: 400; color: var(--terra-soft);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  .tap-arrow { display:block; margin: 10px auto 0; opacity:.7; }
+  .stage.gone .tap-hint { opacity: 0; }
+  @keyframes pulse { 0%,100%{opacity:.45} 50%{opacity:1} }
+
+  /* ============ STAGE 2 : INVITATION ============ */
+  .invite {
+    position: relative;
+    z-index: 3;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 64px 30px 80px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1s ease .15s, transform 1s ease .15s;
+  }
+  .invite.show { opacity: 1; transform: none; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s ease, transform .9s ease; }
+  .invite.show .reveal { opacity: 1; transform: none; }
+  .invite.show .d1 { transition-delay: .35s; }
+  .invite.show .d2 { transition-delay: .55s; }
+  .invite.show .d3 { transition-delay: .75s; }
+  .invite.show .d4 { transition-delay: .95s; }
+  .invite.show .d5 { transition-delay: 1.15s; }
+  .invite.show .d6 { transition-delay: 1.35s; }
+
+  .eyebrow {
+    font-size: 13px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--terra-soft); font-weight: 400;
+  }
+  .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(46px, 15vw, 74px);
+    line-height: .95; letter-spacing: .02em;
+    margin: 6px 0 2px;
+  }
+  .subtitle {
+    font-size: 12px; letter-spacing: .34em; text-transform: uppercase;
+    color: var(--terra-soft); font-weight: 400;
+  }
+
+  /* place-setting motif */
+  .motif { width: 150px; height: 150px; margin: 30px auto 26px; }
+  .motif svg { width: 100%; height: 100%; display: block; }
+
+  .welcome {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 500;
+    font-size: clamp(26px, 7vw, 34px);
+    line-height: 1.25;
+  }
+  .welcome .name { font-style: normal; display: block; font-size: 1.28em; margin-top: 4px; }
+
+  .lede { margin-top: 14px; font-size: 15px; letter-spacing: .04em; color: var(--terra-soft); }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 9px;
+    margin: 30px 0 4px;
+    padding: 11px 24px;
+    border: 1px solid rgba(188,75,43,.4);
+    border-radius: 100px;
+    font-size: 12px; letter-spacing: .26em; text-transform: uppercase;
+    background: rgba(188,75,43,.06);
+  }
+  .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 4px rgba(188,75,43,.15); }
+
+  .rule { width: 46px; height: 1px; background: rgba(188,75,43,.4); margin: 40px auto; }
+
+  .details { display: grid; gap: 22px; }
+  .row .label {
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--terra-soft); margin-bottom: 5px;
+  }
+  .row .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px; font-weight: 500;
+  }
+  .seating .value { font-size: 27px; }
+
+  /* schedule coming-soon card */
+  .soon {
+    margin: 44px auto 0;
+    padding: 26px 22px;
+    border: 1px dashed rgba(188,75,43,.45);
+    border-radius: 14px;
+    background: rgba(188,75,43,.04);
+  }
+  .soon .label { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--terra-soft); }
+  .soon .headline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; margin: 8px 0 6px; }
+  .soon .note { font-size: 13.5px; color: var(--terra-soft); letter-spacing: .02em; line-height: 1.5; }
+  .soon .dots { margin-top: 14px; }
+  .soon .dots span {
+    display: inline-block; width: 6px; height: 6px; margin: 0 3px; border-radius: 50%;
+    background: var(--terra-soft); opacity: .4;
+    animation: blink 1.4s infinite;
+  }
+  .soon .dots span:nth-child(2){ animation-delay: .2s; }
+  .soon .dots span:nth-child(3){ animation-delay: .4s; }
+  @keyframes blink { 0%,100%{opacity:.25} 50%{opacity:.9} }
+
+  .signoff {
+    margin-top: 48px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px;
+  }
+  .signoff .from { display:block; font-style: normal; font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--terra-soft); margin-top: 12px; }
+
+  .corner { position: fixed; width: 54px; height: 54px; z-index: 4; opacity: .8; pointer-events: none; }
+  .corner.tl { top: 20px; left: 20px; }
+  .corner.br { bottom: 20px; right: 20px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .envelope { animation: none; }
+    .reveal, .invite { transition-duration: .01ms; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- STAGE 1 -->
+  <div class="stage" id="stage" role="button" tabindex="0" aria-label="Tap to open your invitation">
+    <div class="envelope" id="envelope">
+      <div class="env-part env-body"></div>
+      <div class="letter"><span class="monogram">LN</span></div>
+      <div class="env-part env-left"></div>
+      <div class="env-part env-right"></div>
+      <div class="env-part env-front"></div>
+      <div class="env-part env-flap"></div>
+      <div class="seal">YAM</div>
+    </div>
+    <div class="tap-hint">
+      Tap to open
+      <svg class="tap-arrow" width="22" height="12" viewBox="0 0 22 12" fill="none">
+        <path d="M1 1l10 9 10-9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- decorative sunbursts -->
+  <div class="corner tl"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="64.0" y1="50.0" x2="96.0" y2="50.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="63.5" y1="53.6" x2="94.4" y2="61.9" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="62.1" y1="57.0" x2="89.8" y2="73.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="59.9" y1="59.9" x2="82.5" y2="82.5" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="57.0" y1="62.1" x2="73.0" y2="89.8" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="53.6" y1="63.5" x2="61.9" y2="94.4" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="50.0" y1="64.0" x2="50.0" y2="96.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="46.4" y1="63.5" x2="38.1" y2="94.4" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="43.0" y1="62.1" x2="27.0" y2="89.8" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="40.1" y1="59.9" x2="17.5" y2="82.5" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="37.9" y1="57.0" x2="10.2" y2="73.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="36.5" y1="53.6" x2="5.6" y2="61.9" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="36.0" y1="50.0" x2="4.0" y2="50.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="36.5" y1="46.4" x2="5.6" y2="38.1" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="37.9" y1="43.0" x2="10.2" y2="27.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="40.1" y1="40.1" x2="17.5" y2="17.5" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="43.0" y1="37.9" x2="27.0" y2="10.2" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="46.4" y1="36.5" x2="38.1" y2="5.6" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="50.0" y1="36.0" x2="50.0" y2="4.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="53.6" y1="36.5" x2="61.9" y2="5.6" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="57.0" y1="37.9" x2="73.0" y2="10.2" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="59.9" y1="40.1" x2="82.5" y2="17.5" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="62.1" y1="43.0" x2="89.8" y2="27.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="63.5" y1="46.4" x2="94.4" y2="38.1" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><circle cx="50" cy="50" r="8" fill="#BC4B2B"/></svg></div>
+  <div class="corner br"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="64.0" y1="50.0" x2="96.0" y2="50.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="63.5" y1="53.6" x2="94.4" y2="61.9" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="62.1" y1="57.0" x2="89.8" y2="73.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="59.9" y1="59.9" x2="82.5" y2="82.5" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="57.0" y1="62.1" x2="73.0" y2="89.8" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="53.6" y1="63.5" x2="61.9" y2="94.4" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="50.0" y1="64.0" x2="50.0" y2="96.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="46.4" y1="63.5" x2="38.1" y2="94.4" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="43.0" y1="62.1" x2="27.0" y2="89.8" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="40.1" y1="59.9" x2="17.5" y2="82.5" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="37.9" y1="57.0" x2="10.2" y2="73.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="36.5" y1="53.6" x2="5.6" y2="61.9" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="36.0" y1="50.0" x2="4.0" y2="50.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="36.5" y1="46.4" x2="5.6" y2="38.1" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="37.9" y1="43.0" x2="10.2" y2="27.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="40.1" y1="40.1" x2="17.5" y2="17.5" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="43.0" y1="37.9" x2="27.0" y2="10.2" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="46.4" y1="36.5" x2="38.1" y2="5.6" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="50.0" y1="36.0" x2="50.0" y2="4.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="53.6" y1="36.5" x2="61.9" y2="5.6" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="57.0" y1="37.9" x2="73.0" y2="10.2" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="59.9" y1="40.1" x2="82.5" y2="17.5" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="62.1" y1="43.0" x2="89.8" y2="27.0" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><line x1="63.5" y1="46.4" x2="94.4" y2="38.1" stroke="#BC4B2B" stroke-width="2.4" stroke-linecap="round"/><circle cx="50" cy="50" r="8" fill="#BC4B2B"/></svg></div>
+
+  <!-- STAGE 2 -->
+  <main class="invite" id="invite">
+    <p class="eyebrow reveal d1">You're Invited to our</p>
+    <h1 class="title reveal d1">Ladies Night</h1>
+    <p class="subtitle reveal d1">Hosted by The YAM Guys</p>
+
+    <div class="motif reveal d2"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#BC4B2B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <circle cx="100" cy="100" r="52" opacity=".9"/>
+  <circle cx="100" cy="100" r="42" opacity=".5"/>
+  <!-- fork -->
+  <path d="M40 62v20a10 10 0 0 0 10 10v46" opacity=".85"/>
+  <path d="M40 62v22M50 62v22M46 62v22" opacity=".85"/>
+  <!-- knife -->
+  <path d="M160 62c-8 4-10 18-10 28h10z" opacity=".85"/>
+  <path d="M160 62v76" opacity=".85"/>
+  <!-- napkin bow -->
+  <path d="M100 96c-14-6-24 6-16 12 6 4 16-2 16-12z" opacity=".9"/>
+  <path d="M100 96c14-6 24 6 16 12-6 4-16-2-16-12z" opacity=".9"/>
+  <circle cx="100" cy="99" r="3" fill="#BC4B2B" stroke="none"/>
+</svg></div>
+
+    <p class="welcome reveal d2">
+      Welcome,
+      <span class="name">Grace.</span>
+    </p>
+    <p class="lede reveal d2">Your table is ready.</p>
+
+    <div class="badge reveal d3"><span class="dot"></span> Reservation Confirmed</div>
+
+    <div class="rule reveal d3"></div>
+
+    <div class="details reveal d4">
+      <div class="row"><div class="label">Date</div><div class="value">Friday, July 24, 2026</div></div>
+      <div class="row"><div class="label">Time</div><div class="value">6:30 PM</div></div>
+      <div class="row"><div class="label">Location</div><div class="value">See your paper invitation</div></div>
+      <div class="row seating"><div class="label">Your Seat</div><div class="value">To be announced</div></div>
+    </div>
+
+    <div class="soon reveal d5">
+      <div class="label">Evening Schedule</div>
+      <div class="headline">Soon to come</div>
+      <div class="note">The full schedule for the evening is being finalized and will appear right here. Tap your card again closer to the date.</div>
+      <div class="dots"><span></span><span></span><span></span></div>
+    </div>
+
+    <p class="signoff reveal d6">
+      We are grateful you'll be joining us.
+      <span class="from">— The YAM Guys</span>
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      var stage = document.getElementById('stage');
+      var envelope = document.getElementById('envelope');
+      var invite = document.getElementById('invite');
+      var opened = false;
+
+      function open() {
+        if (opened) return;
+        opened = true;
+        envelope.classList.add('opening');
+        // reveal invitation after the flap/letter animation
+        setTimeout(function () {
+          stage.classList.add('gone');
+          invite.classList.add('show');
+          document.body.style.overflow = 'auto';
+          window.scrollTo(0, 0);
+        }, 1150);
+      }
+
+      document.body.style.overflow = 'hidden';
+      stage.addEventListener('click', open);
+      stage.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
+    })();
+  </script>
+</body>
+</html>

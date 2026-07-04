@@ -1,0 +1,20 @@
+{
+  "baseUrl": "https://USERNAME.github.io/ladies-night",
+  "event": {
+    "name": "Ladies Night",
+    "host": "The YAM Guys",
+    "date": "Friday, July 24, 2026",
+    "time": "6:30 PM"
+  },
+  "guests": [
+    { "code": "7meut", "name": "Angelina Su",     "firstName": "Angelina", "status": "Confirmed" },
+    { "code": "t8es9", "name": "Evangelina Wong",  "firstName": "Evangelina", "status": "Confirmed" },
+    { "code": "7rsxr", "name": "Grace Xu",         "firstName": "Grace",    "status": "Confirmed" },
+    { "code": "nxh5k", "name": "Kristine Nguyen",  "firstName": "Kristine", "status": "Confirmed" },
+    { "code": "wa6q2", "name": "Li Yang",          "firstName": "Li",       "status": "Confirmed" },
+    { "code": "27kau", "name": "Maixe Vang",       "firstName": "Maixe",    "status": "Confirmed" },
+    { "code": "8mmy8", "name": "Nicole Chun",      "firstName": "Nicole",   "status": "Confirmed" },
+    { "code": "vtt73", "name": "Rachel Chen",      "firstName": "Rachel",   "status": "Confirmed" },
+    { "code": "asgbh", "name": "Sabrina Tang",     "firstName": "Sabrina",  "status": "Confirmed" }
+  ]
+}
