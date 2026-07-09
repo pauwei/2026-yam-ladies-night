@@ -175,6 +175,7 @@
   .invite.show .d4 { transition-delay: .95s; }
   .invite.show .d5 { transition-delay: 1.15s; }
   .invite.show .d6 { transition-delay: 1.35s; }
+  .invite.show .d7 { transition-delay: 1.55s; }
 
   .eyebrow {
     font-size: 13px; letter-spacing: .3em; text-transform: uppercase;
@@ -250,6 +251,17 @@
   .soon .dots span:nth-child(2){ animation-delay: .2s; }
   .soon .dots span:nth-child(3){ animation-delay: .4s; }
   @keyframes blink { 0%,100%{opacity:.25} 50%{opacity:.9} }
+
+  .attire {
+    margin: 44px auto 0;
+    padding: 26px 22px;
+    border: 1px solid rgba(188,75,43,.28);
+    border-radius: 14px;
+    background: rgba(188,75,43,.04);
+  }
+  .attire .label { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--terra-soft); }
+  .attire .headline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 25px; margin: 8px 0 10px; }
+  .attire .note { font-size: 13.5px; color: var(--terra-soft); letter-spacing: .02em; line-height: 1.6; }
 
   .signoff {
     margin-top: 48px;
@@ -330,14 +342,20 @@
       <div class="row seating"><div class="label">Your Seat</div><div class="value">To be announced</div></div>
     </div>
 
-    <div class="soon reveal d5">
+    <div class="attire reveal d5">
+      <div class="label">Attire</div>
+      <div class="headline">Dressy &amp; Colorful</div>
+      <p class="note">Consider this your excuse to get dressed up. Polished, elegant, and a little glamorous, with plenty of room for creativity. Color is warmly encouraged; we simply ask that you leave the black-and-white to the gentlemen serving you for the evening.</p>
+    </div>
+
+    <div class="soon reveal d6">
       <div class="label">Evening Schedule</div>
       <div class="headline">Soon to come</div>
       <div class="note">The full schedule for the evening is being finalized and will appear right here. Tap your card again closer to the date.</div>
       <div class="dots"><span></span><span></span><span></span></div>
     </div>
 
-    <p class="signoff reveal d6">
+    <p class="signoff reveal d7">
       We are grateful you'll be joining us.
       <span class="from">— The YAM Guys</span>
     </p>
