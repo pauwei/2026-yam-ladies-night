@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<title>Ladies Night · Menu (print)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Jost', sans-serif; background: #d8d4cc; color: #BC4B2B; }
+  .page {
+    width: 8.5in; height: 11in; margin: 0 auto; background: #fff;
+    display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+    gap: .25in; padding: .25in;
+  }
+  .menu {
+    width: 3.75in; height: 4.9in;
+    background: #F3F0E9;
+    border: 1px solid #e0c9bd;
+    padding: .32in .3in .26in;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+  }
+  .eyebrow { font-size: 7px; letter-spacing: .32em; text-transform: uppercase; color: #C96A47; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 25px; line-height: 1; margin: 4px 0 3px; }
+  .sub { font-size: 6.5px; letter-spacing: .3em; text-transform: uppercase; color: #C96A47; }
+  .date { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 10.5px; margin-top: 5px; }
+  .rule { width: .5in; height: 1px; background: rgba(188,75,43,.4); margin: .12in 0; }
+  .courses { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; width: 100%; }
+  .course .fr { font-size: 7px; letter-spacing: .3em; text-transform: uppercase; color: #C96A47; }
+  .course .dish { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 14.5px; line-height: 1.1; margin-top: 2px; }
+  .fin { font-size: 6.5px; letter-spacing: .3em; text-transform: uppercase; color: #C96A47; margin-top: .1in; }
+  @media print {
+    body { background: #fff; }
+    .page { page-break-after: always; }
+    @page { size: letter; margin: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="menu" id="m1">
+      <p class="eyebrow">You're Invited to our</p>
+      <h1>Ladies Night</h1>
+      <p class="sub">Hosted by The YAM Guys</p>
+      <p class="date">Friday, July 24, 2026</p>
+      <div class="rule"></div>
+      <div class="courses">
+        <div class="course"><div class="fr">Le Pain</div><div class="dish">Baguette with Garlic Confit</div></div>
+        <div class="course"><div class="fr">Le Potage</div><div class="dish">Consommé Brunoise</div></div>
+        <div class="course"><div class="fr">L'Entrée</div><div class="dish">Pommes Pavé</div></div>
+        <div class="course"><div class="fr">La Salade</div><div class="dish">House Salad</div></div>
+        <div class="course"><div class="fr">Le Plat Principal</div><div class="dish">Herb-Crusted Rack of Lamb</div></div>
+        <div class="course"><div class="fr">Le Dessert</div><div class="dish">Honey Lemon Semifreddo</div></div>
+      </div>
+      <div class="fin">Bon Appétit</div>
+    </div>
+    <div class="menu" id="m2"></div>
+    <div class="menu" id="m3"></div>
+    <div class="menu" id="m4"></div>
+  </div>
+  <script>
+    // duplicate so each printed sheet yields four menus
+    ['m2','m3','m4'].forEach(function (id) {
+      document.getElementById(id).innerHTML = document.getElementById('m1').innerHTML;
+    });
+  </script>
+</body>
+</html>
