@@ -176,6 +176,7 @@
   .invite.show .d5 { transition-delay: 1.15s; }
   .invite.show .d6 { transition-delay: 1.35s; }
   .invite.show .d7 { transition-delay: 1.55s; }
+  .invite.show .d8 { transition-delay: 1.75s; }
 
   .eyebrow {
     font-size: 13px; letter-spacing: .3em; text-transform: uppercase;
@@ -231,26 +232,30 @@
   }
   .seating .value { font-size: 27px; }
 
-  /* schedule coming-soon card */
+  /* evening schedule card */
   .soon {
     margin: 44px auto 0;
-    padding: 26px 22px;
-    border: 1px dashed rgba(188,75,43,.45);
+    padding: 26px 24px 30px;
+    border: 1px solid rgba(188,75,43,.28);
     border-radius: 14px;
     background: rgba(188,75,43,.04);
   }
   .soon .label { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--terra-soft); }
-  .soon .headline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; margin: 8px 0 6px; }
-  .soon .note { font-size: 13.5px; color: var(--terra-soft); letter-spacing: .02em; line-height: 1.5; }
-  .soon .dots { margin-top: 14px; }
-  .soon .dots span {
-    display: inline-block; width: 6px; height: 6px; margin: 0 3px; border-radius: 50%;
-    background: var(--terra-soft); opacity: .4;
-    animation: blink 1.4s infinite;
+  .sched { margin-top: 18px; display: grid; gap: 13px; text-align: left; }
+  .sched-row { display: flex; align-items: baseline; gap: 12px; }
+  .sched-time {
+    flex: 0 0 64px; text-align: right;
+    font-size: 12px; letter-spacing: .08em; color: var(--terra-soft);
+    font-variant-numeric: tabular-nums;
   }
-  .soon .dots span:nth-child(2){ animation-delay: .2s; }
-  .soon .dots span:nth-child(3){ animation-delay: .4s; }
-  @keyframes blink { 0%,100%{opacity:.25} 50%{opacity:.9} }
+  .sched-dot {
+    flex: 0 0 5px; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--terra-soft); opacity: .5; align-self: center;
+  }
+  .sched-what {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-weight: 500; line-height: 1.2;
+  }
 
   .attire {
     margin: 44px auto 0;
@@ -339,7 +344,7 @@
       <div class="row"><div class="label">Date</div><div class="value">Friday, July 24, 2026</div></div>
       <div class="row"><div class="label">Time</div><div class="value">6:30 PM</div></div>
       <div class="row"><div class="label">Location</div><div class="value">See your paper invitation</div></div>
-      <div class="row seating"><div class="label">Your Seat</div><div class="value">To be announced</div></div>
+      <div class="row seating"><div class="label">Your Seat</div><div class="value">Check in with the host upon arrival</div></div>
     </div>
 
     <div class="attire reveal d5">
@@ -348,14 +353,24 @@
       <p class="note">Consider this your excuse to get dressed up. Polished, elegant, and a little glamorous, with plenty of room for creativity. Color is warmly encouraged; we simply ask that you leave the black-and-white to the gentlemen serving you for the evening.</p>
     </div>
 
-    <div class="soon reveal d6">
-      <div class="label">Evening Schedule</div>
-      <div class="headline">Soon to come</div>
-      <div class="note">The full schedule for the evening is being finalized and will appear right here. Tap your card again closer to the date.</div>
-      <div class="dots"><span></span><span></span><span></span></div>
+    <div class="attire reveal d6">
+      <div class="label">Arrival</div>
+      <div class="headline">Valet Parking</div>
+      <p class="note">Kindly arrange your own transportation for the evening — we won't be picking you up, but we'll take it from there. When you arrive, pull up to the right-hand side of the driveway, where a valet will greet you and park your car.</p>
     </div>
 
-    <p class="signoff reveal d7">
+    <div class="soon reveal d7">
+      <div class="label">Evening Schedule</div>
+      <div class="sched">
+        <div class="sched-row"><span class="sched-time">6:30 PM</span><span class="sched-dot"></span><span class="sched-what">Doors Open &amp; Check&#8209;In</span></div>
+        <div class="sched-row"><span class="sched-time">6:50 PM</span><span class="sched-dot"></span><span class="sched-what">Welcome &amp; Introduction</span></div>
+        <div class="sched-row"><span class="sched-time">7:00 PM</span><span class="sched-dot"></span><span class="sched-what">Dinner Is Served</span></div>
+        <div class="sched-row"><span class="sched-time">8:10 PM</span><span class="sched-dot"></span><span class="sched-what">Dessert</span></div>
+        <div class="sched-row"><span class="sched-time">8:35 PM</span><span class="sched-dot"></span><span class="sched-what">Group Photo &amp; Fellowship</span></div>
+      </div>
+    </div>
+
+    <p class="signoff reveal d8">
       We are grateful you'll be joining us.
       <span class="from">— The YAM Guys</span>
     </p>
